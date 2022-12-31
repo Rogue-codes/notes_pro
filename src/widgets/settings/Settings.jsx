@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { AiFillSetting } from "react-icons/ai";
-import {MdDarkMode, MdOutlineLightMode} from 'react-icons/md'
+import { MdDarkMode, MdOutlineLightMode } from "react-icons/md";
 import { motion } from "framer-motion";
-function Settings({setDarkMode, darkMode}) {
+function Settings({ setDarkMode, darkMode }) {
   const [showDarkMode, setShowDarkMode] = useState(false);
   const variants = {
     hide: {
@@ -21,13 +21,14 @@ function Settings({setDarkMode, darkMode}) {
   };
 
   // handle dark mode change
-  const handleDarkMode = () =>{
-    setDarkMode(!darkMode)
-    setShowDarkMode(false)
-  }
+  const handleDarkMode = () => {
+    setDarkMode(!darkMode);
+    localStorage.setItem("darkmode", JSON.stringify(!darkMode));
+    setShowDarkMode(false);
+  };
   return (
     <Container>
-      <AiFillSetting onClick={()=>setShowDarkMode(!showDarkMode)}/>
+      <AiFillSetting onClick={() => setShowDarkMode(!showDarkMode)} />
       <motion.div
         className="dark__mode"
         initial="false"
@@ -35,7 +36,11 @@ function Settings({setDarkMode, darkMode}) {
         variants={variants}
         onClick={handleDarkMode}
       >
-        {darkMode ? <MdOutlineLightMode size='1.82rem'/> : <MdDarkMode size='1.82rem'/>}
+        {darkMode ? (
+          <MdOutlineLightMode size="1.82rem" />
+        ) : (
+          <MdDarkMode size="1.82rem" />
+        )}
         <p>{darkMode ? "light" : "dark"}</p>
       </motion.div>
     </Container>
@@ -50,12 +55,12 @@ const Container = styled.div`
   position: relative;
   .dark__mode {
     width: 40vw;
-    height: 6vh;
+    height: 4vh;
     border: 1px solid #000;
     border-radius: 5px;
     background: #333;
     position: absolute;
-    bottom: 25%;
+    bottom: 29%;
     left: 95%;
     font-size: 1rem;
     display: flex;

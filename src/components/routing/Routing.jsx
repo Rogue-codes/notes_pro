@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import {BsFolder2} from 'react-icons/bs'
 function Routing({darkMode}) {
-    console.log(darkMode)
   return (
     <Container>
       <h2>my-notes</h2>
