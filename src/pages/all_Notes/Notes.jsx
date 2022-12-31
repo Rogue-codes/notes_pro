@@ -96,6 +96,7 @@ const Wrapper = styled.section`
   width: 100%;
   min-height: 60vh;
   background: #333;
+  border-radius: 12px;
   .card {
     width: 100%;
     border-bottom: 1px solid lightgrey;
