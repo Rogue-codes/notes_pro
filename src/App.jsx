@@ -4,6 +4,7 @@ import Home from "../src/pages/home/Home";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
 import Notes from '../src/pages/all_Notes/Notes'
+import SingleNote from "./pages/all_Notes/SingleNote";
 function App() {
   // search state
 
@@ -19,6 +20,14 @@ function App() {
     );
   }, []);
 
+    // select individual item
+    const [selectedItem, setSelectedItem] = useState({})
+  
+    function routing(item){
+      setSelectedItem(item)
+    }
+
+
   return (
     <div className={darkMode ? "App dark" : "App"}>
       <Router>
@@ -28,7 +37,8 @@ function App() {
             element={<Home darkMode={darkMode} setDarkMode={setDarkMode} />}
           />
 
-          <Route path='/Notes' element={<Notes darkMode={darkMode}/>}/>
+          <Route path='/Notes' element={<Notes darkMode={darkMode} routing={routing}/>}/>
+          <Route path='/noteDetails' element={<SingleNote item={selectedItem}/>}/>
         </Routes>
         <ToastContainer />
       </Router>

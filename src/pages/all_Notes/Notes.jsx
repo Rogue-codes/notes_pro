@@ -1,20 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { BsFolder2 } from "react-icons/bs";
 import { BiArrowBack } from "react-icons/bi";
-import {MdDelete} from 'react-icons/md'
+import { MdDelete } from "react-icons/md";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import { deleteNote } from "../../features/slice";
-function Notes({ darkMode }) {
+function Notes({ darkMode, routing }) {
   const note = useSelector((state) => state.Note.notes);
-  
+
   // handle delete
-  const dispatch = useDispatch()
-  const handleDelete = (item) =>{
-    dispatch(deleteNote(item))
-  }
+  const dispatch = useDispatch();
+  const handleDelete = (item) => {
+    dispatch(deleteNote(item));
+  };
+
   return (
     <Container>
       <Link to="/" className="back">
@@ -34,18 +35,23 @@ function Notes({ darkMode }) {
       <Wrapper>
         {note.map((item, i) => (
           <div className="card" key={item.id}>
-            <h2>{item.title}</h2>
-            <span className="date">{moment(item.date).fromNow()}</span>
+            <Link to="/noteDetails" onClick={() => routing(item)}>
+              {item.title}
+            </Link>
+            <span className="date">{moment().startOf(item.date).fromNow()}</span>
             <div className="category">
               <BsFolder2 size="2rem" />
               <p>{item.category}</p>
             </div>
-            <div className="delete" onClick={()=>handleDelete(item)}>
-              <MdDelete size='1.3rem'/>
+            <div className="delete" onClick={() => handleDelete(item)}>
+              <MdDelete size="1.3rem" />
             </div>
           </div>
         ))}
       </Wrapper>
+      <div className="count">
+        <p>{note.length} Notes</p>
+      </div>
     </Container>
   );
 }
@@ -56,6 +62,7 @@ const Container = styled.main`
   width: 100%;
   min-height: 100vh;
   padding: 5%;
+  position: relative;
   .back {
     display: flex;
     text-decoration: none;
@@ -91,20 +98,38 @@ const Container = styled.main`
       background: #333;
     }
   }
+  .count {
+    width: 100%;
+    height: 10vh;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #33333388;
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(104px);
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+  }
 `;
 const Wrapper = styled.section`
   width: 100%;
   min-height: 60vh;
   background: #333;
   border-radius: 12px;
+  margin-bottom: 15%;
+  padding-bottom: 5%;
   .card {
     width: 100%;
     border-bottom: 1px solid lightgrey;
     padding: 2% 5%;
     position: relative;
-    h2 {
+    a {
       font-size: 1rem;
       color: var(--text-color);
+      display: block;
     }
     .date {
       font-size: 0.7rem;
@@ -121,7 +146,7 @@ const Wrapper = styled.section`
         font-size: 1rem;
       }
     }
-    .delete{
+    .delete {
       position: absolute;
       right: 5%;
       top: 50%;
