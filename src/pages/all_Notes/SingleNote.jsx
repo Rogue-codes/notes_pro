@@ -4,16 +4,16 @@ import { BiArrowBack, BiEdit } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-function SingleNote({ item }) {
+function SingleNote({ item, darkMode }) {
   return (
     <Container>
       <Link to="/Notes" className="back">
         <BiArrowBack />
         <p>back</p>
       </Link>
-      <h2>{item.title}</h2>
+      <h2 className={darkMode ? "title dark" : "title"}>{item.title}</h2>
       <span>{moment().startOf(item.date).fromNow()}</span>
-      <p>{item.desc}</p>
+      <p className={darkMode ? "desc dark" : "desc"}>{item.desc}</p>
       <BiEdit className='edit'/>
     </Container>
   );
@@ -36,9 +36,14 @@ const Container = styled.main`
     gap: 2%;
     margin-bottom: 5%;
   }
-  h2 {
-    color: white !important;
+  .title {
     font-size: 2rem;
+    color: black;
+    font-weight: 800;
+  }
+  .desc{
+    color: black;
+    line-height: 30px;
   }
   span{
     margin-bottom: 5%;
@@ -51,5 +56,8 @@ const Container = styled.main`
     right: 2%;
     font-size: 2rem;
     color: var(--secondary-color);
+  }
+  .dark{
+    color: white;
   }
 `;

@@ -38,7 +38,7 @@ function App() {
           />
 
           <Route path='/Notes' element={<Notes darkMode={darkMode} routing={routing}/>}/>
-          <Route path='/noteDetails' element={<SingleNote item={selectedItem}/>}/>
+          <Route path='/noteDetails' element={<SingleNote item={selectedItem} darkMode={darkMode}/>}/>
         </Routes>
         <ToastContainer />
       </Router>
