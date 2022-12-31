@@ -3,7 +3,7 @@ import React from "react";
 import styled from "styled-components";
 import BackDrop from "./BackDrop";
 
-function Modal({ handleClose, inputVal, setInputVal, darkMode }) {
+function Modal({ handleClose, inputVal, setInputVal, darkMode, addNote }) {
   // variant for modal animation.
   const dropIn = {
     hidden: {
@@ -29,7 +29,17 @@ function Modal({ handleClose, inputVal, setInputVal, darkMode }) {
 
   // handle inputs
   const { title, desc, category } = inputVal;
-  //   -------------------------------------------------------------------
+  //   close modal
+
+  function handleSubmit(e) {
+    e.preventDefault();
+  }
+
+  //   add note
+  function handleNoteSubmit() {
+    addNote();
+    handleClose()
+  }
   return (
     <BackDrop handleClose={handleClose}>
       <ModalContainer
@@ -40,7 +50,7 @@ function Modal({ handleClose, inputVal, setInputVal, darkMode }) {
         exit="exit"
         bg={darkMode ? "#1a1919" : "#fff"}
       >
-        <form action="">
+        <form action="" onSubmit={handleSubmit}>
           <div className="title">
             <input
               type="text"
@@ -84,6 +94,14 @@ function Modal({ handleClose, inputVal, setInputVal, darkMode }) {
               <option value="groceries">Groceries</option>
             </select>
           </div>
+          <div className="form__action">
+            <button className="submit" onClick={handleNoteSubmit}>
+              Add
+            </button>
+            <button className="cancel" onClick={handleClose}>
+              Cancel
+            </button>
+          </div>
         </form>
       </ModalContainer>
     </BackDrop>
@@ -102,7 +120,7 @@ const ModalContainer = styled(motion.div)`
   padding-top: 5%;
   width: 60%;
   height: 80%;
-  background:${props => props.bg};
+  background: ${(props) => props.bg};
   form {
     @media (max-width: 768px) {
       width: 100%;
@@ -120,12 +138,12 @@ const ModalContainer = styled(motion.div)`
             outline: none;
           }
         }
-        .dark{
-            background: #000;
+        .dark {
+          background: #000;
+          color: var(--secondary-color);
+          ::placeholder {
             color: var(--secondary-color);
-            ::placeholder{
-                color: var(--secondary-color);
-            }
+          }
         }
       }
       .description {
@@ -140,18 +158,19 @@ const ModalContainer = styled(motion.div)`
             outline: none;
           }
         }
-        .dark{
-            background: #000;
+        .dark {
+          background: #000;
+          color: var(--secondary-color);
+          ::placeholder {
             color: var(--secondary-color);
-            ::placeholder{
-                color: var(--secondary-color);
-            }
+          }
         }
       }
       .category {
         margin: 5%;
         .select {
           width: 100%;
+          height: 6vh;
           border-radius: 5px;
           padding: 2% 5%;
           border: none;
@@ -160,12 +179,37 @@ const ModalContainer = styled(motion.div)`
             outline: none;
           }
         }
-        .dark{
-            background: #000;
+        .dark {
+          background: #000;
+          color: var(--secondary-color);
+          ::placeholder {
             color: var(--secondary-color);
-            ::placeholder{
-                color: var(--secondary-color);
-            }
+          }
+        }
+      }
+      .form__action {
+        margin: 15% 5%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 5%;
+        .submit {
+          width: 40%;
+          height: 5vh;
+          font-size: 1rem;
+          border-radius: 12px;
+          border: none;
+          background: #0080ff;
+          color: white;
+        }
+        .cancel {
+          width: 40%;
+          height: 5vh;
+          font-size: 1rem;
+          border-radius: 12px;
+          border: none;
+          background: #ff2600;
+          color: white;
         }
       }
     }

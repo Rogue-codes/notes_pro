@@ -1,37 +1,38 @@
 import React from "react";
 import styled from "styled-components";
-import {BsFolder2} from 'react-icons/bs'
-function Routing({darkMode}) {
+import { BsFolder2 } from "react-icons/bs";
+import { Link } from "react-router-dom";
+function Routing({ darkMode }) {
   return (
     <Container>
       <h2>my-notes</h2>
-      <NoteList className="note__list" background={darkMode ? "#333" : 'white'}>
+      <NoteList className="note__list" background={darkMode ? "#333" : "white"}>
         <div className="note">
-            <div className="icon">
-                <BsFolder2/>
-            </div>
-            <p>All notes</p>
+          <div className="icon">
+            <BsFolder2 />
+          </div>
+          <Link to="/Notes">All notes</Link>
         </div>
 
         <div className="note">
-            <div className="icon">
-                <BsFolder2/>
-            </div>
-            <p>Educational</p>
+          <div className="icon">
+            <BsFolder2 />
+          </div>
+          <p>Educational</p>
         </div>
 
         <div className="note">
-            <div className="icon">
-                <BsFolder2/>
-            </div>
-            <p>Fun</p>
+          <div className="icon">
+            <BsFolder2 />
+          </div>
+          <p>Fun</p>
         </div>
 
         <div className="note">
-            <div className="icon">
-                <BsFolder2/>
-            </div>
-            <p>Groceries</p>
+          <div className="icon">
+            <BsFolder2 />
+          </div>
+          <p>Groceries</p>
         </div>
       </NoteList>
     </Container>
@@ -53,27 +54,35 @@ const Container = styled.section`
 `;
 
 const NoteList = styled.div`
-    width: 100%;
-    height: auto;
-    padding: 5%;
-    margin-top: 5%;
-    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
-    border-radius: 12px;
-    background: ${props => props.background};
-    .note{
-        display: flex;
-        justify-content: flex-start;
-        align-items: center;
-        padding: 3%;
-        gap: 2%;
-        p{
-            border-bottom: 1px solid lightgrey;
-            width: 90%;
-            font-weight: 500;
-        }
-        .icon{
-            font-size: 1.5rem;
-            color: var(--secondary-color);
-        }
-  } 
-`
+  width: 100%;
+  height: auto;
+  padding: 5%;
+  margin-top: 5%;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  border-radius: 12px;
+  background: ${(props) => props.background};
+  .note {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 3%;
+    gap: 2%;
+    p {
+      border-bottom: 1px solid lightgrey;
+      width: 90%;
+      font-weight: 500;
+    }
+    a {
+      color: var(--secondary-color);
+      text-decoration: none;
+      border-bottom: 1px solid lightgrey;
+      width: 90%;
+      font-weight: 500;
+    }
+    .icon {
+      font-size: 1.5rem;
+      color: var(--secondary-color);
+    }
+  }
+`;

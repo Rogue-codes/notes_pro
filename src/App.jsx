@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "../src/pages/home/Home";
-
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
+import Notes from '../src/pages/all_Notes/Notes'
 function App() {
   // search state
 
@@ -25,7 +27,10 @@ function App() {
             path="/"
             element={<Home darkMode={darkMode} setDarkMode={setDarkMode} />}
           />
+
+          <Route path='/Notes' element={<Notes darkMode={darkMode}/>}/>
         </Routes>
+        <ToastContainer />
       </Router>
     </div>
   );
