@@ -23,7 +23,7 @@ function Notes({ darkMode, routing }) {
         <p>back</p>
       </Link>
       <header>
-        <h2>All Notes</h2>
+        <h2 className={darkMode ?"all dark-text" : 'all'}>All Notes</h2>
         <input
           type="search"
           name=""
@@ -32,10 +32,10 @@ function Notes({ darkMode, routing }) {
           className={darkMode ? "input dark" : "input"}
         />
       </header>
-      <Wrapper>
+      <Wrapper bg={darkMode ? '#333' : '#fff'} color={darkMode ? 'grey': "goldenrod"}>
         {note.map((item, i) => (
           <div className="card" key={item.id}>
-            <Link to="/noteDetails" onClick={() => routing(item)}>
+            <Link to="/noteDetails" onClick={() => routing(item)} className={darkMode ? "link dark-text" : "link"}>
               {item.title}
             </Link>
             <span className="date">{moment().startOf(item.date).fromNow()}</span>
@@ -75,12 +75,12 @@ const Container = styled.main`
   header {
     margin-bottom: 5%;
     height: auto;
-    h2 {
+    .all {
       font-weight: 800;
       font-family: var(--main-font);
       font-size: 2rem;
       margin-bottom: 2%;
-      color: var(--text-color);
+      color: var(--secondary-color);
     }
     .input {
       width: 100%;
@@ -97,6 +97,10 @@ const Container = styled.main`
     .dark {
       background: #333;
     }
+
+    .dark-text {
+      color: white;
+    }
   }
   .count {
     width: 100%;
@@ -107,17 +111,16 @@ const Container = styled.main`
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #33333388;
     -webkit-backdrop-filter: blur(5px);
     backdrop-filter: blur(104px);
-    border-bottom-left-radius: 12px;
-    border-bottom-right-radius: 12px;
+    color: var(--secondary-color);
   }
 `;
 const Wrapper = styled.section`
   width: 100%;
-  min-height: 60vh;
-  background: #333;
+  min-height: 40vh;
+  background: ${props => props.bg};
+  color: ${props => props.color}!important;
   border-radius: 12px;
   margin-bottom: 15%;
   padding-bottom: 5%;
@@ -126,14 +129,14 @@ const Wrapper = styled.section`
     border-bottom: 1px solid lightgrey;
     padding: 2% 5%;
     position: relative;
-    a {
+    .link {
       font-size: 1rem;
-      color: var(--text-color);
+      color: var(--secondary-color);
       display: block;
     }
     .date {
       font-size: 0.7rem;
-      color: grey;
+      /* color: grey; */
     }
     .category {
       display: flex;
@@ -141,7 +144,7 @@ const Wrapper = styled.section`
       align-items: center;
       gap: 2%;
       font-size: 1.4rem;
-      color: grey;
+      /* color: grey; */
       p {
         font-size: 1rem;
       }
@@ -151,6 +154,9 @@ const Wrapper = styled.section`
       right: 5%;
       top: 50%;
       color: red;
+    }
+    .dark-text{
+      color: var(--text-color);
     }
   }
 `;

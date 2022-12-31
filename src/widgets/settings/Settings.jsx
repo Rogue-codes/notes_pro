@@ -55,7 +55,7 @@ const Container = styled.div`
   position: relative;
   .dark__mode {
     width: 40vw;
-    height: 4vh;
+    height: 5vh;
     border: 1px solid #000;
     border-radius: 5px;
     background: #333;

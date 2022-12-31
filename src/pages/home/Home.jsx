@@ -70,6 +70,5 @@ export default Home;
 const Container = styled.main`
   width: 100%;
   height: 100vh;
-  border: 5px solid #000;
   position: relative;
 `;

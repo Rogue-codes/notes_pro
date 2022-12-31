@@ -1,3 +1,4 @@
+import moment from "moment";
 import React from "react";
 import { BiArrowBack, BiEdit } from "react-icons/bi";
 import { Link } from "react-router-dom";
@@ -11,6 +12,7 @@ function SingleNote({ item }) {
         <p>back</p>
       </Link>
       <h2>{item.title}</h2>
+      <span>{moment().startOf(item.date).fromNow()}</span>
       <p>{item.desc}</p>
       <BiEdit className='edit'/>
     </Container>
@@ -22,7 +24,6 @@ export default SingleNote;
 const Container = styled.main`
   width: 100%;
   min-height: 100vh;
-  border: 5px solid #e40d0d;
   color: white;
   padding: 5%;
   position: relative;
@@ -38,6 +39,11 @@ const Container = styled.main`
   h2 {
     color: white !important;
     font-size: 2rem;
+  }
+  span{
+    margin-bottom: 5%;
+    font-size:.7rem;
+    color: var(--secondary-color);
   }
   .edit{
     position: absolute;
