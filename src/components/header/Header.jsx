@@ -24,11 +24,15 @@ const Container = styled.header`
   form {
     .input {
       width: 100%;
-      height: 8vh;
+      height: 5vh;
       background: lightgrey;
       border-radius: 12px;
       border: none;
       padding: 2%;
+      &::placeholder {
+        color: var(--secondary-color);
+        font-size:1rem;
+      }
     }
     .dark{
         background: #333;
