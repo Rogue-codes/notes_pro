@@ -37,9 +37,9 @@ function Settings({ setDarkMode, darkMode }) {
         onClick={handleDarkMode}
       >
         {darkMode ? (
-          <MdOutlineLightMode size="1.82rem" />
+          <MdOutlineLightMode size="1.2rem" />
         ) : (
-          <MdDarkMode size="1.82rem" />
+          <MdDarkMode size="1.2rem" />
         )}
         <p>{darkMode ? "light" : "dark"}</p>
       </motion.div>
@@ -61,7 +61,7 @@ const Container = styled.div`
     background: #333;
     position: absolute;
     bottom: 29%;
-    left: 95%;
+    left: 100%;
     font-size: 1rem;
     display: flex;
     justify-content: flex-start;
