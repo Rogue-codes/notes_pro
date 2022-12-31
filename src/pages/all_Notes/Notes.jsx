@@ -118,7 +118,7 @@ const Container = styled.main`
 `;
 const Wrapper = styled.section`
   width: 100%;
-  min-height: 40vh;
+  min-height: 20vh;
   background: ${props => props.bg};
   color: ${props => props.color}!important;
   border-radius: 12px;
