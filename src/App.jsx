@@ -24,11 +24,11 @@ function App() {
   }, []);
 
   // select individual item
-  const [selectedItem, setSelectedItem] = useState({});
+  // const [selectedItem, setSelectedItem] = useState({});
+  // function routing(item) {
+  //   setSelectedItem(item);
+  // }
 
-  function routing(item) {
-    setSelectedItem(item);
-  }
 
   return (
     <div className={darkMode ? "App dark" : "App"}>
@@ -46,13 +46,12 @@ function App() {
                 searchVal={searchVal}
                 setSearchVal={setSearchVal}
                 darkMode={darkMode}
-                routing={routing}
               />
             }
           />
           <Route
             path="/noteDetails"
-            element={<SingleNote item={selectedItem} darkMode={darkMode} />}
+            element={<SingleNote darkMode={darkMode} />}
           />
           <Route
             path="/educational"
@@ -61,7 +60,6 @@ function App() {
                 searchVal={searchVal}
                 setSearchVal={setSearchVal}
                 darkMode={darkMode}
-                routing={routing}
               />
             }
           />
@@ -72,7 +70,6 @@ function App() {
                 darkMode={darkMode}
                 searchVal={searchVal}
                 setSearchVal={setSearchVal}
-                routing={routing}
               />
             }
           />
@@ -81,7 +78,6 @@ function App() {
             element={
               <Shopping
                 darkMode={darkMode}
-                routing={routing}
                 searchVal={searchVal}
                 setSearchVal={setSearchVal}
               />

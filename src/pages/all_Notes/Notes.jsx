@@ -5,7 +5,7 @@ import { BiArrowBack } from "react-icons/bi";
 import { MdDelete } from "react-icons/md";
 import { Link } from "react-router-dom";
 import moment from "moment";
-import { deleteNote } from "../../features/slice";
+import { deleteNote, getNote } from "../../features/slice";
 function Notes({ setSearchVal, searchVal, darkMode, routing }) {
   const note = useSelector((state) => state.Note.notes);
 
@@ -15,6 +15,10 @@ function Notes({ setSearchVal, searchVal, darkMode, routing }) {
     dispatch(deleteNote(item));
   };
 
+  // get single note
+  const singleNote = (item) => {
+    dispatch(getNote(item.id))
+  }
   console.log(searchVal);
 
   return (
@@ -55,7 +59,7 @@ function Notes({ setSearchVal, searchVal, darkMode, routing }) {
               <div className="card" key={item.id}>
                 <Link
                   to="/noteDetails"
-                  onClick={() => routing(item)}
+                  onClick={() => singleNote(item)}
                   className={darkMode ? "link dark-text" : "link"}
                 >
                   {item.title}

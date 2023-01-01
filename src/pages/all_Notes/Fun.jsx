@@ -6,15 +6,20 @@ import { BiArrowBack } from "react-icons/bi";
 import { MdDelete } from "react-icons/md";
 import styled from "styled-components";
 import moment from "moment";
-import { deleteNote } from "../../features/slice";
+import { deleteNote, getNote } from "../../features/slice";
 
-function Fun({ darkMode, routing, searchVal, setSearchVal }) {
-  const notef = useSelector((state) => state.Note.notes);
-  const note = notef.filter((item) => item.category === "fun");
+function Fun({ darkMode, searchVal, setSearchVal }) {
+  const note = useSelector((state) => state.Note.notes);
+  const fun = note.filter((item) => item.category === "fun");
   // handle delete
   const dispatch = useDispatch();
   const handleDelete = (item) => {
     dispatch(deleteNote(item));
+  };
+
+  // get single note
+  const singleNote = (item) => {
+    dispatch(getNote(item.id));
   };
   return (
     <Container>
@@ -38,38 +43,42 @@ function Fun({ darkMode, routing, searchVal, setSearchVal }) {
         bg={darkMode ? "#333" : "#fff"}
         color={darkMode ? "grey" : "goldenrod"}
       >
-        {
-        note && note.length > 0 ?
-        (note.filter((val)=>{
-            if(searchVal === ''){
-                return val
-            }else if(val.title.toLowerCase().includes(searchVal.toLowerCase())){
-              return val
-            }else{
-              return null
-            }
-        }).map((item, i) => (
-          <div className="card" key={item.id}>
-            <Link
-              to="/noteDetails"
-              onClick={() => routing(item)}
-              className={darkMode ? "link dark-text" : "link"}
-            >
-              {item.title}
-            </Link>
-            <span className="date">
-              {moment().startOf(item.date).fromNow()}
-            </span>
-            <div className="category">
-              <BsFolder2 size="2rem" />
-              <p>{item.category}</p>
-            </div>
-            <div className="delete" onClick={() => handleDelete(item)}>
-              <MdDelete size="1.3rem" />
-            </div>
-          </div>
-        ))):(
-            <p  className="empty">You have no Notes</p>
+        {fun && fun.length > 0 ? (
+          fun
+            .filter((val) => {
+              if (searchVal === "") {
+                return val;
+              } else if (
+                val.title.toLowerCase().includes(searchVal.toLowerCase())
+              ) {
+                return val;
+              } else {
+                return null;
+              }
+            })
+            .map((item, i) => (
+              <div className="card" key={item.id}>
+                <Link
+                  to="/noteDetails"
+                  onClick={() => singleNote(item)}
+                  className={darkMode ? "link dark-text" : "link"}
+                >
+                  {item.title}
+                </Link>
+                <span className="date">
+                  {moment().startOf(item.date).fromNow()}
+                </span>
+                <div className="category">
+                  <BsFolder2 size="2rem" />
+                  <p>{item.category}</p>
+                </div>
+                <div className="delete" onClick={() => handleDelete(item)}>
+                  <MdDelete size="1.3rem" />
+                </div>
+              </div>
+            ))
+        ) : (
+          <p className="empty">You have no Notes</p>
         )}
       </Wrapper>
       <div className={darkMode ? "count dark-text" : "count"}>

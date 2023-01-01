@@ -6,16 +6,22 @@ import { BiArrowBack } from "react-icons/bi";
 import { MdDelete } from "react-icons/md";
 import styled from "styled-components";
 import moment from "moment";
-import { deleteNote } from "../../features/slice";
+import { deleteNote, getNote } from "../../features/slice";
 
-function Educational({ darkMode, routing, searchVal, setSearchVal }) {
-  const notef = useSelector((state) => state.Note.notes);
-  const note = notef.filter((item) => item.category === "educational");
+function Educational({ darkMode, searchVal, setSearchVal }) {
+  const note = useSelector((state) => state.Note.notes);
+  const educational = note.filter((item) => item.category === "educational");
   // handle delete
   const dispatch = useDispatch();
   const handleDelete = (item) => {
     dispatch(deleteNote(item));
   };
+
+  // get single note
+  const singleNote = (item) => {
+    dispatch(getNote(item.id));
+  };
+
   return (
     <Container>
       <Link to="/" className="back">
@@ -40,8 +46,8 @@ function Educational({ darkMode, routing, searchVal, setSearchVal }) {
         bg={darkMode ? "#333" : "#fff"}
         color={darkMode ? "grey" : "goldenrod"}
       >
-        {note && note.length > 0 ? (
-          note
+        {educational && educational.length > 0 ? (
+          educational
             .filter((val) => {
               if (searchVal === "") {
                 return val;
@@ -56,7 +62,7 @@ function Educational({ darkMode, routing, searchVal, setSearchVal }) {
               <div className="card" key={item.id}>
                 <Link
                   to="/noteDetails"
-                  onClick={() => routing(item)}
+                  onClick={() => singleNote(item)}
                   className={darkMode ? "link dark-text" : "link"}
                 >
                   {item.title}
