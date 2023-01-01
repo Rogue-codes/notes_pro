@@ -8,7 +8,7 @@ import styled from "styled-components";
 import moment from "moment";
 import { deleteNote } from "../../features/slice";
 
-function Educational({ darkMode, routing }) {
+function Educational({ darkMode, routing, searchVal, setSearchVal }) {
   const notef = useSelector((state) => state.Note.notes);
   const note = notef.filter((item) => item.category === "educational");
   // handle delete
@@ -23,10 +23,14 @@ function Educational({ darkMode, routing }) {
         <p>back</p>
       </Link>
       <header>
-        <h2 className={darkMode ? "all dark-text" : "all"}>Educational Notes</h2>
+        <h2 className={darkMode ? "all dark-text" : "all"}>
+          Educational Notes
+        </h2>
         <input
           type="search"
           name=""
+          value={searchVal}
+          onChange={(e) => setSearchVal(e.target.value)}
           id=""
           placeholder="Search"
           className={darkMode ? "input dark" : "input"}
@@ -36,27 +40,42 @@ function Educational({ darkMode, routing }) {
         bg={darkMode ? "#333" : "#fff"}
         color={darkMode ? "grey" : "goldenrod"}
       >
-        {note.map((item, i) => (
-          <div className="card" key={item.id}>
-            <Link
-              to="/noteDetails"
-              onClick={() => routing(item)}
-              className={darkMode ? "link dark-text" : "link"}
-            >
-              {item.title}
-            </Link>
-            <span className="date">
-              {moment().startOf(item.date).fromNow()}
-            </span>
-            <div className="category">
-              <BsFolder2 size="2rem" />
-              <p>{item.category}</p>
-            </div>
-            <div className="delete" onClick={() => handleDelete(item)}>
-              <MdDelete size="1.3rem" />
-            </div>
-          </div>
-        ))}
+        {note && note.length > 0 ? (
+          note
+            .filter((val) => {
+              if (searchVal === "") {
+                return val;
+              } else if (
+                val.title.toLowerCase().includes(searchVal.toLowerCase())
+              ) {
+                return val;
+              }
+              return null;
+            })
+            .map((item, i) => (
+              <div className="card" key={item.id}>
+                <Link
+                  to="/noteDetails"
+                  onClick={() => routing(item)}
+                  className={darkMode ? "link dark-text" : "link"}
+                >
+                  {item.title}
+                </Link>
+                <span className="date">
+                  {moment().startOf(item.date).fromNow()}
+                </span>
+                <div className="category">
+                  <BsFolder2 size="2rem" />
+                  <p>{item.category}</p>
+                </div>
+                <div className="delete" onClick={() => handleDelete(item)}>
+                  <MdDelete size="1.3rem" />
+                </div>
+              </div>
+            ))
+        ) : (
+          <p className="empty">No Notes Available</p>
+        )}
       </Wrapper>
       <div className={darkMode ? "count dark-text" : "count"}>
         <p>{note.length} Notes</p>
@@ -172,5 +191,12 @@ const Wrapper = styled.section`
     .dark-text {
       color: var(--text-color);
     }
+  }
+  .empty {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 5%;
+    color: var(--text-color);
   }
 `;

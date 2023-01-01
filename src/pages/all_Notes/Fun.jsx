@@ -8,7 +8,7 @@ import styled from "styled-components";
 import moment from "moment";
 import { deleteNote } from "../../features/slice";
 
-function Fun({ darkMode, routing }) {
+function Fun({ darkMode, routing, searchVal, setSearchVal }) {
   const notef = useSelector((state) => state.Note.notes);
   const note = notef.filter((item) => item.category === "fun");
   // handle delete
@@ -27,6 +27,8 @@ function Fun({ darkMode, routing }) {
         <input
           type="search"
           name=""
+          value={searchVal}
+          onChange={(e) => setSearchVal(e.target.value)}
           id=""
           placeholder="Search"
           className={darkMode ? "input dark" : "input"}
@@ -36,7 +38,17 @@ function Fun({ darkMode, routing }) {
         bg={darkMode ? "#333" : "#fff"}
         color={darkMode ? "grey" : "goldenrod"}
       >
-        {note.map((item, i) => (
+        {
+        note && note.length > 0 ?
+        (note.filter((val)=>{
+            if(searchVal === ''){
+                return val
+            }else if(val.title.toLowerCase().includes(searchVal.toLowerCase())){
+              return val
+            }else{
+              return null
+            }
+        }).map((item, i) => (
           <div className="card" key={item.id}>
             <Link
               to="/noteDetails"
@@ -56,7 +68,9 @@ function Fun({ darkMode, routing }) {
               <MdDelete size="1.3rem" />
             </div>
           </div>
-        ))}
+        ))):(
+            <p  className="empty">You have no Notes</p>
+        )}
       </Wrapper>
       <div className={darkMode ? "count dark-text" : "count"}>
         <p>{note.length} Notes</p>
@@ -172,5 +186,12 @@ const Wrapper = styled.section`
     .dark-text {
       color: var(--text-color);
     }
+  }
+  .empty {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 5%;
+    color: var(--text-color);
   }
 `;

@@ -56,15 +56,36 @@ function App() {
           />
           <Route
             path="/educational"
-            element={<Educational darkMode={darkMode} routing={routing} />}
+            element={
+              <Educational
+                searchVal={searchVal}
+                setSearchVal={setSearchVal}
+                darkMode={darkMode}
+                routing={routing}
+              />
+            }
           />
           <Route
             path="/fun"
-            element={<Fun darkMode={darkMode} routing={routing} />}
+            element={
+              <Fun
+                darkMode={darkMode}
+                searchVal={searchVal}
+                setSearchVal={setSearchVal}
+                routing={routing}
+              />
+            }
           />
           <Route
             path="/shopping"
-            element={<Shopping darkMode={darkMode} routing={routing} />}
+            element={
+              <Shopping
+                darkMode={darkMode}
+                routing={routing}
+                searchVal={searchVal}
+                setSearchVal={setSearchVal}
+              />
+            }
           />
         </Routes>
         <ToastContainer />
