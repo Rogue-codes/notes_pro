@@ -38,7 +38,7 @@ function Modal({ handleClose, inputVal, setInputVal, darkMode, addNote }) {
   //   add note
   function handleNoteSubmit() {
     addNote();
-    handleClose()
+    handleClose();
   }
   return (
     <BackDrop handleClose={handleClose}>
@@ -115,12 +115,117 @@ const ModalContainer = styled(motion.div)`
     flex-direction: column;
     height: 70%;
     position: relative;
+    padding-top: 5%;
   }
-  padding-top: 5%;
+  /* padding-top: 5%; */
   width: 60%;
-  height: 80%;
+  height: 90%;
   background: ${(props) => props.bg};
   form {
+    width: 100%;
+    height: 100%;
+    .title {
+      margin: 5%;
+      .input {
+        width: 100%;
+        height: 6vh;
+        padding: 2% 5%;
+        border-radius: 5px;
+        border: none;
+        background: lightgrey;
+        &:focus {
+          outline: none;
+        }
+      }
+      .dark {
+        background: #000;
+        color: var(--secondary-color);
+        ::placeholder {
+          color: var(--secondary-color);
+        }
+      }
+    }
+    .description {
+      margin: 5%;
+      .text__area {
+        width: 100%;
+        border-radius: 5px;
+        padding: 2% 5%;
+        border: none;
+        background: lightgrey;
+        &:focus {
+          outline: none;
+        }
+      }
+      .dark {
+        background: #000;
+        color: var(--secondary-color);
+        ::placeholder {
+          color: var(--secondary-color);
+        }
+      }
+    }
+    .category {
+      margin: 5%;
+      .select {
+        @media (max-width: 768px) {
+          height: 6vh;
+      }
+        width: 100%;
+        height: 8vh;
+        border-radius: 5px;
+        padding: 2% 5%;
+        border: none;
+        background: lightgrey;
+        &:focus {
+          outline: none;
+        }
+      }
+      .dark {
+        background: #000;
+        color: var(--secondary-color);
+        ::placeholder {
+          color: var(--secondary-color);
+        }
+      }
+    }
+    .form__action {
+      @media (max-width: 768px) {
+        margin: 15% 5%;
+      }
+      margin: 5% 5%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 5%;
+      .submit {
+        @media (max-width: 768px) {
+          height: 5vh;
+        }
+        width: 40%;
+        cursor: pointer;
+        height: 8vh;
+        font-size: 1rem;
+        border-radius: 12px;
+        border: none;
+        background: #0080ff;
+        color: white;
+      }
+      .cancel {
+        @media (max-width: 768px) {
+          height: 5vh;
+        }
+        width: 40%;
+        cursor: pointer;
+        height: 8vh;
+        font-size: 1rem;
+        border-radius: 12px;
+        border: none;
+        background: #ff2600;
+        color: white;
+      }
+    }
+
     @media (max-width: 768px) {
       width: 100%;
       height: 100%;

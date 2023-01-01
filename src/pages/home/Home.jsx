@@ -39,7 +39,7 @@ function Home({ darkMode, setDarkMode }) {
   return (
     <Container>
       <Header darkMode={darkMode} />
-      <Routing darkMode={darkMode} />
+      <Routing darkMode={darkMode} openModal={openModal} />
       <Actionable
         openModal={openModal}
         darkMode={darkMode}
@@ -68,7 +68,10 @@ function Home({ darkMode, setDarkMode }) {
 export default Home;
 
 const Container = styled.main`
+@media (max-width: 768px) {
+  min-height: 100vh;
+}
   width: 100%;
-  height: 100vh;
+  min-height: 150vh;
   position: relative;
 `;

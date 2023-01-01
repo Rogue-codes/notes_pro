@@ -102,6 +102,7 @@ const Container = styled.main`
     align-items: center;
     gap: 2%;
     margin-bottom: 5%;
+    cursor: pointer;
   }
   header {
     margin-bottom: 5%;

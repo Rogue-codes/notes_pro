@@ -82,7 +82,7 @@ function Fun({ darkMode, searchVal, setSearchVal }) {
         )}
       </Wrapper>
       <div className={darkMode ? "count dark-text" : "count"}>
-        <p>{note.length} Notes</p>
+        <p>{fun.length} Notes</p>
       </div>
     </Container>
   );
@@ -103,6 +103,7 @@ const Container = styled.main`
     align-items: center;
     gap: 2%;
     margin-bottom: 5%;
+    cursor: pointer;
   }
   header {
     margin-bottom: 5%;

@@ -1,6 +1,7 @@
 import moment from "moment";
 import React, { Fragment, useState } from "react";
 import { BiArrowBack, BiEdit } from "react-icons/bi";
+import { AiOutlineClose } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,8 +10,8 @@ import { editNote, getNote } from "../../features/slice";
 function SingleNote({ darkMode }) {
   const [edit, setEdit] = useState(false);
   const navigate = useNavigate();
-  
-  const currNote = useSelector((state)=>state.Note.note)
+
+  const currNote = useSelector((state) => state.Note.note);
 
   const [inputVal, setInputVal] = useState({
     title: currNote.title,
@@ -18,25 +19,32 @@ function SingleNote({ darkMode }) {
     category: currNote.category,
   });
 
-  console.log(currNote)
+  console.log(currNote);
 
   // handle inputs
   const { title, desc, category } = inputVal;
-  const payload = {...inputVal, id: currNote.id} 
-  console.log(payload)
+  const payload = { ...inputVal, id: currNote.id };
+  console.log(payload);
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   // update note
   function handleSubmit(e) {
     e.preventDefault();
-    dispatch(editNote(payload))
-    dispatch(getNote(payload.id))
-    setEdit(false)
+    dispatch(editNote(payload));
+    dispatch(getNote(payload.id));
+    setEdit(false);
   }
 
   return (
     <Container>
-      <BiEdit className="edit" onClick={() => setEdit(!edit)} />
+      <BiEdit
+        className={edit ? "edit close" : "edit"}
+        onClick={() => setEdit(!edit)}
+      />
+      <AiOutlineClose
+        className={edit ? "edit" : "edit close"}
+        onClick={() => setEdit(!edit)}
+      />
       {edit ? (
         <form action="" onSubmit={handleSubmit}>
           <div className="title">
@@ -96,7 +104,9 @@ function SingleNote({ darkMode }) {
             <BiArrowBack />
             <p>back</p>
           </div>
-          <h2 className={darkMode ? "title dark" : "title"}>{currNote.title}</h2>
+          <h2 className={darkMode ? "title dark" : "title"}>
+            {currNote.title}
+          </h2>
           <span>{moment().startOf(currNote.date).fromNow()}</span>
           <p className={darkMode ? "desc dark" : "desc"}>{currNote.desc}</p>
         </Fragment>
@@ -121,6 +131,7 @@ const Container = styled.main`
     align-items: center;
     gap: 2%;
     margin-bottom: 5%;
+    cursor: pointer;
   }
   .title {
     font-size: 2rem;
@@ -137,11 +148,19 @@ const Container = styled.main`
     color: var(--secondary-color);
   }
   .edit {
+    @media (max-width: 768px) {
+      top: 2%;
+      right: 2%;
+    }
     position: absolute;
-    top: 2%;
-    right: 2%;
     font-size: 2rem;
     color: var(--secondary-color);
+    cursor: pointer;
+    top: 12%;
+    right: 6%;
+  }
+  .close {
+    display: none;
   }
   .dark {
     color: white;
@@ -152,6 +171,113 @@ const Container = styled.main`
     border: 5px solid #b70202;
   }
   form {
+    width: 100%;
+    height: 100%;
+    background: #333;
+    padding: 5%;
+    border-radius: 12px;
+    .title {
+      margin: 5%;
+      .input {
+        width: 100%;
+        height: 6vh;
+        padding: 2% 5%;
+        border-radius: 5px;
+        border: none;
+        background: lightgrey;
+        &:focus {
+          outline: none;
+        }
+      }
+      .dark {
+        background: #000;
+        color: var(--secondary-color);
+        ::placeholder {
+          color: var(--secondary-color);
+        }
+      }
+    }
+    .description {
+      margin: 5%;
+      .text__area {
+        width: 100%;
+        border-radius: 5px;
+        padding: 2% 5%;
+        border: none;
+        background: lightgrey;
+        &:focus {
+          outline: none;
+        }
+      }
+      .dark {
+        background: #000;
+        color: var(--secondary-color);
+        ::placeholder {
+          color: var(--secondary-color);
+        }
+      }
+    }
+    .category {
+      margin: 5%;
+      .select {
+        @media (max-width: 768px) {
+          height: 6vh;
+        }
+        width: 100%;
+        height: 10vh;
+        border-radius: 5px;
+        padding: 2% 5%;
+        border: none;
+        background: lightgrey;
+        &:focus {
+          outline: none;
+        }
+      }
+      .dark {
+        background: #000;
+        color: var(--secondary-color);
+        ::placeholder {
+          color: var(--secondary-color);
+        }
+      }
+    }
+    .form__action {
+      @media (max-width: 768px) {
+        margin: 15% 5%;
+      }
+      margin: 5% 5%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 5%;
+      .submit {
+        @media (max-width: 768px) {
+          height: 5vh;
+        }
+        width: 40%;
+        cursor: pointer;
+        height: 8vh;
+        font-size: 1rem;
+        border-radius: 12px;
+        border: none;
+        background: #0080ff;
+        color: white;
+      }
+      .cancel {
+        @media (max-width: 768px) {
+          height: 5vh;
+        }
+        width: 40%;
+        cursor: pointer;
+        height: 8vh;
+        font-size: 1rem;
+        border-radius: 12px;
+        border: none;
+        background: #ff2600;
+        color: white;
+      }
+    }
+
     @media (max-width: 768px) {
       width: 100%;
       height: 100%;

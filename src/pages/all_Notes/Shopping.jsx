@@ -101,6 +101,7 @@ const Container = styled.main`
     align-items: center;
     gap: 2%;
     margin-bottom: 5%;
+    cur-height:
   }
   header {
     margin-bottom: 5%;

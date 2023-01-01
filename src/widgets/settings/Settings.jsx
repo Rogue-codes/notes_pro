@@ -53,8 +53,12 @@ const Container = styled.div`
   font-size: 2.5rem;
   color: var(--secondary-color);
   position: relative;
+  cursor: pointer;
   .dark__mode {
-    width: 40vw;
+    @media (max-width: 768px) {
+      width: 40vw;
+    }
+    width: 10vw;
     height: 5vh;
     border: 1px solid #000;
     border-radius: 5px;

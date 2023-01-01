@@ -2,10 +2,16 @@ import React from "react";
 import styled from "styled-components";
 import { BsFolder2 } from "react-icons/bs";
 import { Link } from "react-router-dom";
-function Routing({ darkMode }) {
+import ModalButton from "../../widgets/modal/ModalButton";
+function Routing({ darkMode, openModal }) {
   return (
     <Container>
-      <h2>my-notes</h2>
+      <div className="header">
+        <h2>my-notes</h2>
+        <ModalButton openModal={openModal} show='desktop' />
+      </div>
+      <h2 className="my__notes__mobile">my-notes</h2>
+
       <NoteList className="note__list" background={darkMode ? "#333" : "white"}>
         <div className="note">
           <div className="icon">
@@ -25,14 +31,14 @@ function Routing({ darkMode }) {
           <div className="icon">
             <BsFolder2 />
           </div>
-          <Link to='fun'>Fun</Link>
+          <Link to="fun">Fun</Link>
         </div>
 
         <div className="note">
           <div className="icon">
             <BsFolder2 />
           </div>
-          <Link to='/shopping'>Shopping</Link>
+          <Link to="/shopping">Shopping</Link>
         </div>
       </NoteList>
     </Container>
@@ -44,12 +50,25 @@ const Container = styled.section`
   padding: 5%;
   width: 100%;
   height: auto;
-  h2 {
-    font-family: var(--main-font);
+  .my__notes__mobile {
     @media (max-width: 768px) {
+      font-family: var(--main-font);
+      display: block;
       margin-left: 10%;
       font-size: 1.7rem;
     }
+    display: none;
+  }
+  .header {
+    @media (max-width: 768px) {
+      display: none;
+    }
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--main-font);
+    font-size: 1.7rem;
   }
 `;
 
