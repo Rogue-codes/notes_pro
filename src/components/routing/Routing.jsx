@@ -25,14 +25,14 @@ function Routing({ darkMode }) {
           <div className="icon">
             <BsFolder2 />
           </div>
-          <p>Fun</p>
+          <Link to='fun'>Fun</Link>
         </div>
 
         <div className="note">
           <div className="icon">
             <BsFolder2 />
           </div>
-          <p>Groceries</p>
+          <Link to='/shopping'>Shopping</Link>
         </div>
       </NoteList>
     </Container>

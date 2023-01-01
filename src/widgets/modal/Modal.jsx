@@ -88,10 +88,9 @@ function Modal({ handleClose, inputVal, setInputVal, darkMode, addNote }) {
               id=""
               className={darkMode ? "select dark" : "select"}
             >
-              <option value="all">All</option>
               <option value="educational">Educational</option>
               <option value="fun">Fun</option>
-              <option value="groceries">Groceries</option>
+              <option value="shopping">Shopping</option>
             </select>
           </div>
           <div className="form__action">
