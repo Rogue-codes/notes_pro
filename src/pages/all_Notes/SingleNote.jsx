@@ -1,16 +1,17 @@
 import moment from "moment";
 import React from "react";
 import { BiArrowBack, BiEdit } from "react-icons/bi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 function SingleNote({ item, darkMode }) {
+  const navigate = useNavigate();
   return (
     <Container>
-      <Link to="/Notes" className="back">
+      <div to="/Notes" className="back" onClick={()=>navigate(-1)}>
         <BiArrowBack />
         <p>back</p>
-      </Link>
+      </div>
       <h2 className={darkMode ? "title dark" : "title"}>{item.title}</h2>
       <span>{moment().startOf(item.date).fromNow()}</span>
       <p className={darkMode ? "desc dark" : "desc"}>{item.desc}</p>

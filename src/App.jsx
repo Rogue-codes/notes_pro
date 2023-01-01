@@ -5,6 +5,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'
 import Notes from '../src/pages/all_Notes/Notes'
 import SingleNote from "./pages/all_Notes/SingleNote";
+import Educational from "./pages/all_Notes/Educational";
 function App() {
   // search state
 
@@ -39,6 +40,7 @@ function App() {
 
           <Route path='/Notes' element={<Notes darkMode={darkMode} routing={routing}/>}/>
           <Route path='/noteDetails' element={<SingleNote item={selectedItem} darkMode={darkMode}/>}/>
+          <Route path='/educational' element={<Educational darkMode={darkMode} routing={routing}/>}/>
         </Routes>
         <ToastContainer />
       </Router>

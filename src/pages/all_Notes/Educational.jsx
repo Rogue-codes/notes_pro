@@ -1,21 +1,21 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import styled from "styled-components";
+import { Link } from "react-router-dom";
 import { BsFolder2 } from "react-icons/bs";
 import { BiArrowBack } from "react-icons/bi";
 import { MdDelete } from "react-icons/md";
-import { Link } from "react-router-dom";
+import styled from "styled-components";
 import moment from "moment";
 import { deleteNote } from "../../features/slice";
-function Notes({ darkMode, routing }) {
-  const note = useSelector((state) => state.Note.notes);
 
+function Educational({ darkMode, routing }) {
+  const notef = useSelector((state) => state.Note.notes);
+  const note = notef.filter((item) => item.category === "educational");
   // handle delete
   const dispatch = useDispatch();
   const handleDelete = (item) => {
     dispatch(deleteNote(item));
   };
-
   return (
     <Container>
       <Link to="/" className="back">
@@ -23,7 +23,7 @@ function Notes({ darkMode, routing }) {
         <p>back</p>
       </Link>
       <header>
-        <h2 className={darkMode ? "all dark-text" : "all"}>All Notes</h2>
+        <h2 className={darkMode ? "all dark-text" : "all"}>Educational Notes</h2>
         <input
           type="search"
           name=""
@@ -65,7 +65,7 @@ function Notes({ darkMode, routing }) {
   );
 }
 
-export default Notes;
+export default Educational;
 
 const Container = styled.main`
   width: 100%;

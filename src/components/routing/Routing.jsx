@@ -18,7 +18,7 @@ function Routing({ darkMode }) {
           <div className="icon">
             <BsFolder2 />
           </div>
-          <p>Educational</p>
+          <Link to="/educational">Educational</Link>
         </div>
 
         <div className="note">
