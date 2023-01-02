@@ -3,7 +3,14 @@ import styled from "styled-components";
 import { BsFolder2 } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import ModalButton from "../../widgets/modal/ModalButton";
+import { useSelector } from "react-redux";
 function Routing({ darkMode, openModal }) {
+  // getting count of each note category
+  const note = useSelector((state)=>state.Note.notes)
+  const educational = note.filter((state)=>state.category === "educational")
+  const fun = note.filter((state)=>state.category === "fun")
+  const shopping = note.filter((state)=>state.category === "shopping")
+  // --------------------------------------------------------------------------------------------
   return (
     <Container>
       <div className="header">
@@ -17,28 +24,28 @@ function Routing({ darkMode, openModal }) {
           <div className="icon">
             <BsFolder2 />
           </div>
-          <Link to="/Notes">All notes</Link>
+          <Link to="/Notes">All notes ({note.length})</Link>
         </div>
 
         <div className="note">
           <div className="icon">
             <BsFolder2 />
           </div>
-          <Link to="/educational">Educational</Link>
+          <Link to="/educational">Educational ({educational.length})</Link>
         </div>
 
         <div className="note">
           <div className="icon">
             <BsFolder2 />
           </div>
-          <Link to="fun">Fun</Link>
+          <Link to="fun">Fun ({fun.length})</Link>
         </div>
 
         <div className="note">
           <div className="icon">
             <BsFolder2 />
           </div>
-          <Link to="/shopping">Shopping</Link>
+          <Link to="/shopping">Shopping ({shopping.length})</Link>
         </div>
       </NoteList>
     </Container>

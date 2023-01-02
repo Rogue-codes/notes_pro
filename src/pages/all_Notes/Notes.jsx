@@ -6,7 +6,7 @@ import { MdDelete } from "react-icons/md";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import { deleteNote, getNote } from "../../features/slice";
-function Notes({ setSearchVal, searchVal, darkMode, routing }) {
+function Notes({ setSearchVal, searchVal, darkMode }) {
   const note = useSelector((state) => state.Note.notes);
 
   // handle delete
@@ -65,7 +65,7 @@ function Notes({ setSearchVal, searchVal, darkMode, routing }) {
                   {item.title}
                 </Link>
                 <span className="date">
-                  {moment().startOf(item.date).fromNow()}
+                {moment.utc(item.date).local().startOf('seconds').fromNow()}
                 </span>
                 <div className="category">
                   <BsFolder2 size="2rem" />

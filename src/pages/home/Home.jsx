@@ -23,7 +23,7 @@ function Home({ darkMode, setDarkMode }) {
   });
 
   // add note
-  const date = new Date().toLocaleDateString();
+  const date = new Date();
 
   const dispatch = useDispatch();
 
