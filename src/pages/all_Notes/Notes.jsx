@@ -75,7 +75,7 @@ function Notes({ setSearchVal, searchVal, darkMode }) {
                   <p>{item.category}</p>
                 </div>
                 <div className="delete" onClick={() => handleDelete(item)}>
-                  <MdDelete size="1.3rem" />
+                  <MdDelete size="1.3rem"/>
                 </div>
               </div>
             ))
@@ -194,6 +194,7 @@ const Wrapper = styled.section`
       right: 5%;
       top: 50%;
       color: red;
+      cursor: pointer;
     }
     .dark-text {
       color: var(--text-color);
