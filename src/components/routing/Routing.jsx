@@ -14,7 +14,7 @@ function Routing({ darkMode, openModal }) {
   return (
     <Container>
       <div className="header">
-        <h2>my-notes</h2>
+        <h2>my-notes ({note.length})</h2>
         <ModalButton openModal={openModal} show='desktop' />
       </div>
       <h2 className="my__notes__mobile">my-notes</h2>
