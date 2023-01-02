@@ -8,6 +8,7 @@ import Modal from "../../widgets/modal/Modal";
 import { useDispatch } from "react-redux";
 import { handleAddNote } from "../../features/slice";
 import { v4 as uuid } from "uuid";
+import { toast } from "react-toastify";
 function Home({ darkMode, setDarkMode }) {
   // modal logic
   const [showModal, setShowModal] = useState(false);
@@ -21,6 +22,7 @@ function Home({ darkMode, setDarkMode }) {
     desc: "",
     category: "",
   });
+  // -----------------------------------------------------------------------
 
   // add note
   const date = new Date();
@@ -35,7 +37,11 @@ function Home({ darkMode, setDarkMode }) {
         date,
       })
     );
+    inputVal.title = "";
+    inputVal.desc = "";
+    inputVal.category = "";
   };
+
   return (
     <Container>
       <Header darkMode={darkMode} />
@@ -68,9 +74,9 @@ function Home({ darkMode, setDarkMode }) {
 export default Home;
 
 const Container = styled.main`
-@media (max-width: 768px) {
-  min-height: 100vh;
-}
+  @media (max-width: 768px) {
+    min-height: 100vh;
+  }
   width: 100%;
   min-height: 150vh;
   position: relative;

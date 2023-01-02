@@ -11,6 +11,9 @@ import { deleteNote, getNote } from "../../features/slice";
 function Fun({ darkMode, searchVal, setSearchVal }) {
   const note = useSelector((state) => state.Note.notes);
   const fun = note.filter((item) => item.category === "fun");
+  const sortedNotes = [...fun];
+  // sort according to time, (earliest first)
+  sortedNotes.sort((a, b) => new Date(b.date) - new Date(a.date));
   // handle delete
   const dispatch = useDispatch();
   const handleDelete = (item) => {
@@ -43,8 +46,8 @@ function Fun({ darkMode, searchVal, setSearchVal }) {
         bg={darkMode ? "#333" : "#fff"}
         color={darkMode ? "grey" : "goldenrod"}
       >
-        {fun && fun.length > 0 ? (
-          fun
+        {sortedNotes && sortedNotes.length > 0 ? (
+          sortedNotes
             .filter((val) => {
               if (searchVal === "") {
                 return val;

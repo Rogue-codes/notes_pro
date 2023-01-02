@@ -61,6 +61,7 @@ function App() {
 
   return (
     <div className={darkMode ? "App dark" : "App"}>
+      {/* preloader screen */}
       <AnimatePresence>
         {preloader && (
           <PreLoaderDiv
@@ -115,6 +116,8 @@ function App() {
           </PreLoaderDiv>
         )}
       </AnimatePresence>
+      {/* ......................................................................... */}
+
       <Router>
         <Routes>
           <Route
@@ -193,13 +196,14 @@ const PreLoaderDiv = styled(motion.div)`
   z-index: 222;
   h1{
     font-size: 3rem;
+    font-weight: 800;
   }
   h2{
     font-size: 1.7rem;
     text-align: center;
   }
   p{
-    font-size: .7rem;
+    font-size: 1rem;
     font-style: italic;
   }
 `;

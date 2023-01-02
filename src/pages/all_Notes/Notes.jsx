@@ -8,6 +8,9 @@ import moment from "moment";
 import { deleteNote, getNote } from "../../features/slice";
 function Notes({ setSearchVal, searchVal, darkMode }) {
   const note = useSelector((state) => state.Note.notes);
+  const sortedNotes = [...note]
+  // sort according to time, (earliest first)
+  sortedNotes.sort((a,b) => new Date(b.date) - new Date(a.date)) 
 
   // handle delete
   const dispatch = useDispatch();
@@ -43,8 +46,8 @@ function Notes({ setSearchVal, searchVal, darkMode }) {
         bg={darkMode ? "#333" : "#fff"}
         color={darkMode ? "grey" : "goldenrod"}
       >
-        {note && note.length > 0 ? (
-          note
+        {sortedNotes && sortedNotes.length > 0 ? (
+          sortedNotes
             .filter((val) => {
               if (searchVal === "") {
                 return val;

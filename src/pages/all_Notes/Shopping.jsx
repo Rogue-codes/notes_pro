@@ -11,6 +11,9 @@ import { deleteNote, getNote } from "../../features/slice";
 function Shopping({ darkMode, routing, searchVal, setSearchVal }) {
   const note = useSelector((state) => state.Note.notes);
   const shopping = note.filter((item) => item.category === "shopping");
+  const sortedNotes = [...shopping];
+  // sort according to time, (earliest first)
+  sortedNotes.sort((a, b) => new Date(b.date) - new Date(a.date));
   // handle delete
   const dispatch = useDispatch();
   const handleDelete = (item) => {
@@ -42,8 +45,8 @@ function Shopping({ darkMode, routing, searchVal, setSearchVal }) {
         bg={darkMode ? "#333" : "#fff"}
         color={darkMode ? "grey" : "goldenrod"}
       >
-        {shopping && shopping.length > 0 ? (
-          shopping
+        {sortedNotes && sortedNotes.length > 0 ? (
+          sortedNotes
             .filter((val) => {
               if (searchVal === "") {
                 return val;
@@ -101,7 +104,6 @@ const Container = styled.main`
     align-items: center;
     gap: 2%;
     margin-bottom: 5%;
-    cur-height:
   }
   header {
     margin-bottom: 5%;

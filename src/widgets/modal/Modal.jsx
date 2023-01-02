@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import React from "react";
+import { toast } from "react-toastify";
 import styled from "styled-components";
 import BackDrop from "./BackDrop";
 
@@ -37,7 +38,11 @@ function Modal({ handleClose, inputVal, setInputVal, darkMode, addNote }) {
 
   //   add note
   function handleNoteSubmit() {
-    addNote();
+    !title || !desc
+      ? toast.error(
+          " FAILED: please enter a Title and description for your note!!"
+        )
+      : addNote();
     handleClose();
   }
   return (
@@ -88,6 +93,7 @@ function Modal({ handleClose, inputVal, setInputVal, darkMode, addNote }) {
               id=""
               className={darkMode ? "select dark" : "select"}
             >
+              <option value="">--- choose category ---</option>
               <option value="educational">Educational</option>
               <option value="fun">Fun</option>
               <option value="shopping">Shopping</option>
@@ -170,7 +176,7 @@ const ModalContainer = styled(motion.div)`
       .select {
         @media (max-width: 768px) {
           height: 6vh;
-      }
+        }
         width: 100%;
         height: 8vh;
         border-radius: 5px;
